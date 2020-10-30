@@ -18,12 +18,17 @@ int main(void) {
         .map<int>([](int x) { return x * x; })
         .then([](int x) { printf("Squared is %i\n", x); });
 
-    // Or the imperative way
+    // ...Or the imperative way...
     auto found = find_in_array(array, 4, to_find[i]);
     if (found.is_some()) {
       auto squared = found.unwrap();
       printf("Cubed is %i\n", squared * squared * squared);
     }
+
+    // But you can't ignore the fact that it might not return anything!
+    //  error: no match for ‘operator*’ (operand types are ‘maybe::Maybe<int>’ and ‘maybe::Maybe<int>’)
+    // auto x = find_in_array(array, 4, to_find[i]);
+    // printf("Squared is %i\n", x*x);
   }
   return 0;
 }
